@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` InventoryItem renders correctly 1`] = `
+<Text
+  style={
+    Array [
+      Object {
+        "color": "#6B6651",
+        "fontSize": 15,
+        "lineHeight": 20,
+      },
+      undefined,
+    ]
+  }
+>
+  HIIII
+</Text>
+`;

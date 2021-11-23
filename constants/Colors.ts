@@ -8,6 +8,9 @@ export default {
     tint: tintColorLight,
     tabIconDefault: "#ccc",
     tabIconSelected: tintColorLight,
+    shadow: "rgb(6, 8, 13)",
+    gray1000: "#2C2302",
+    gray700: "#6B6651",
   },
   dark: {
     text: "#fff",

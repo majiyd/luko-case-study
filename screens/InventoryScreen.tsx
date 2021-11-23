@@ -1,19 +1,21 @@
-import React, {useEffect} from 'react';
-import { StyleSheet } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import { FlatList, StyleSheet } from 'react-native';
 import api from '../api';
+import InventoryItem from '../components/InventoryItem';
+import { View } from '../components/Themed';
+import { Inventory } from '../types';
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
-
-export default function TabTwoScreen() {
+export default function InventoryScreen() {
   useEffect(() => {
     getData()
   }, [])
 
+  const [inventories, setInventories] = useState<Inventory[]>([])
+
   const getData  =  async () => {
     try {
       const response =  await api.get()
-      console.log(`response`, response)
+      setInventories(response.data)
       
     } catch (error) {
       console.log(`error`, error)
@@ -21,9 +23,7 @@ export default function TabTwoScreen() {
   }
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
+      <FlatList contentContainerStyle={styles.list} data={inventories} renderItem={({item}) => <InventoryItem details={item} />} keyExtractor={item => String(item.id)} />
     </View>
   );
 }
@@ -31,16 +31,11 @@ export default function TabTwoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingVertical: 15
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+  list: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  }
 });
