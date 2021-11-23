@@ -11,6 +11,9 @@ export default {
     shadow: "rgb(6, 8, 13)",
     gray1000: "#2C2302",
     gray700: "#6B6651",
+    gray300: "#C0BEB8",
+    bluko500: "#2D50E6",
+    Gray50: "#F4F3EF",
   },
   dark: {
     text: "#fff",

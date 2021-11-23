@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActionText ActionText renders correctly 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  hitSlop={
+    Object {
+      "bottom": 15,
+      "left": 15,
+      "right": 15,
+      "top": 15,
+    }
+  }
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "fontSize": 17,
+          "lineHeight": 24,
+        },
+        undefined,
+        Object {
+          "color": "#2D50E6",
+        },
+      ]
+    }
+  >
+    Add
+  </Text>
+</View>
+`;

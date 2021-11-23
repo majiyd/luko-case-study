@@ -41,7 +41,7 @@ function RootNavigator() {
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen name="Modal" component={ModalScreen} options={{ headerShown: false }} />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -54,13 +54,12 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
 
   return (
     <BottomTab.Navigator
       initialRouteName="Inventory"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarActiveTintColor: Colors.light.bluko500,
       }}>
       <BottomTab.Screen
         name="Home"
@@ -93,7 +92,7 @@ function BottomTabNavigator() {
               <FontAwesome
                 name="plus-circle"
                 size={25}
-                color={Colors[colorScheme].text}
+                color={Colors.light.bluko500}
                 style={{ marginRight: 15 }}
               />
             </Pressable>
