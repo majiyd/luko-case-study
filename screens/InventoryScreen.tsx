@@ -1,10 +1,24 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import { StyleSheet } from 'react-native';
+import api from '../api';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
 export default function TabTwoScreen() {
+  useEffect(() => {
+    getData()
+  }, [])
+
+  const getData  =  async () => {
+    try {
+      const response =  await api.get()
+      console.log(`response`, response)
+      
+    } catch (error) {
+      console.log(`error`, error)
+    }
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab Two</Text>
