@@ -15,6 +15,7 @@ import Colors from "../constants/Colors";
 import BaseInput from "../components/forms/BaseInput";
 import BasePicker from "../components/forms/BasePicker";
 import { Category, IPicker } from "../types";
+import BaseTextArea from "../components/forms/BaseTextArea";
 
 interface ICategory extends IPicker {
   value: Category;
@@ -59,7 +60,13 @@ export default function ModalScreen() {
             label="Category"
             placeholder="Select a category..."
           />
-          <BaseInput label="Name" placeholder="Bracelet" type="amount" />
+          <BaseInput
+            label="Name"
+            placeholder="Bracelet"
+            type="amount"
+            style={styles.input}
+          />
+          <BaseTextArea label="Description" />
         </View>
       </KeyboardAwareScrollView>
     </View>
