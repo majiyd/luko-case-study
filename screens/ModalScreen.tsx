@@ -6,6 +6,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 
 import ActionText from '../components/ActionText';
 import Colors from '../constants/Colors';
+import BaseInput from '../components/forms/BaseInput';
 
 export default function ModalScreen() {
   return (
@@ -26,6 +27,9 @@ export default function ModalScreen() {
               />
             </Pressable>
           </View>
+
+          <BaseInput label="Name" placeholder="Bracelet" style={styles.input} />
+          <BaseInput label="Name" placeholder="Bracelet" type="amount" />
         </View>
 
       </KeyboardAwareScrollView>
@@ -65,5 +69,8 @@ const styles = StyleSheet.create({
     borderColor: Colors.light.gray100,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  input: {
+    marginBottom: 20
   }
 });
