@@ -18,7 +18,6 @@ export default function App() {
       <SafeAreaProvider>
         <Navigation colorScheme={colorScheme} />
         <StatusBar />
-        <Text testID="MainText">AAA</Text>
       </SafeAreaProvider>
     );
   }

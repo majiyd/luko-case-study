@@ -10,6 +10,7 @@ export default {
     tabIconSelected: tintColorLight,
     shadow: "rgb(6, 8, 13)",
     gray1000: "#2C2302",
+    gray100: "#EAE9E3",
     gray700: "#6B6651",
     gray300: "#C0BEB8",
     bluko500: "#2D50E6",
