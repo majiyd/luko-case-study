@@ -1,6 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { Platform, StyleSheet, View, Pressable, Image } from "react-native";
+import {
+  Platform,
+  StyleSheet,
+  View,
+  Pressable,
+  Image,
+  Alert,
+} from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 
@@ -13,6 +20,7 @@ import BaseTextArea from "../components/forms/BaseTextArea";
 import { useNavigation } from "@react-navigation/core";
 import CameraScreen from "./Camera";
 import api from "../api";
+import { canAddInvetory } from "../utils";
 
 interface ICategory extends IPicker {
   value: Category;
@@ -45,10 +53,18 @@ export default function ModalScreen() {
 
   const addInventory = async () => {
     try {
+      const purchasePrice = Number(value);
+      // ensure 40,000 limit is not exceeded
+      const canProceed = await canAddInvetory(purchasePrice);
+
+      if (!canProceed) {
+        Alert.alert("Error", "Total inventory cannot be more than 40,000");
+        return;
+      }
       const data: Inventory = {
         id: new Date().getTime(),
         name,
-        purchasePrice: Number(value),
+        purchasePrice,
         type: category?.value!,
         description,
         photo: imageUrl,
@@ -135,7 +151,7 @@ export default function ModalScreen() {
                 type="amount"
                 style={styles.input}
                 keyboardType="number-pad"
-                value={Number(value).toLocaleString()}
+                value={Number(value) ? Number(value).toLocaleString() : ""}
                 onChangeText={handleValueChange}
               />
               <BaseTextArea
