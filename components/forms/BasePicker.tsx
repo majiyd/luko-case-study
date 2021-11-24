@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   item: {
     padding: 20,
     borderBottomWidth: 2,
-    borderBottomColor: Colors.light.Gray50,
+    borderBottomColor: Colors.light.gray50,
     flexDirection: "row",
     justifyContent: "space-between",
   },

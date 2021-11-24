@@ -16,7 +16,8 @@ export default {
     gray300: "#C0BEB8",
     gray400: "#AAA8A1",
     bluko500: "#2D50E6",
-    Gray50: "#F4F3EF",
+    gray50: "#F4F3EF",
+    terracota: "#D95762",
   },
   dark: {
     text: "#fff",
