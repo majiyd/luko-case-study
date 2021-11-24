@@ -1,28 +1,28 @@
-import React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
-import Colors from '../constants/Colors';
-import { Inventory } from '../types';
-import BaseText from './BaseText';
-
+import React from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
+import Colors from "../constants/Colors";
+import { Inventory } from "../types";
+import BaseText from "./BaseText";
 
 type Props = {
   details: Inventory;
 };
-const InventoryItem = ({details}: Props) => {
-  const {name, purchasePrice, photo} = details
+const InventoryItem = ({ details }: Props) => {
+  const { name, purchasePrice, photo } = details;
   return (
-    <View style={styles.item}>
+    <View style={styles.item} testID={name}>
       <View style={styles.imageWrapper}>
-        <Image source={{uri: photo}} style={styles.image} />
+        <Image source={{ uri: photo }} style={styles.image} />
       </View>
-      <View style={styles.content} >
+      <View style={styles.content}>
         <BaseText type="headline">{name}</BaseText>
-        <BaseText style={styles.price}>€{purchasePrice.toLocaleString()}</BaseText>
+        <BaseText style={styles.price}>
+          €{purchasePrice.toLocaleString()}
+        </BaseText>
       </View>
     </View>
-  )
-}
-
+  );
+};
 
 const styles = StyleSheet.create({
   item: {
@@ -32,11 +32,11 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.light.background,
     marginBottom: 20,
     borderRadius: 14,
-    
+
     shadowColor: Colors.light.shadow,
     shadowOffset: {
-    width: 0,
-    height: 10,
+      width: 0,
+      height: 10,
     },
     shadowOpacity: 0.12,
     shadowRadius: 20,
@@ -45,22 +45,21 @@ const styles = StyleSheet.create({
   imageWrapper: {
     width: "100%",
     aspectRatio: 1,
-    
   },
   image: {
     flex: 1,
-    resizeMode: 'cover',
+    resizeMode: "cover",
     borderTopLeftRadius: 14,
     borderTopRightRadius: 14,
   },
   content: {
     paddingVertical: 15,
     paddingHorizontal: 20,
-    justifyContent: 'space-between',
-    flex: 1
+    justifyContent: "space-between",
+    flex: 1,
   },
   price: {
     marginTop: 5,
-  }
-})
-export default InventoryItem
+  },
+});
+export default InventoryItem;

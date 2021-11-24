@@ -101,7 +101,7 @@ export default function ModalScreen() {
 
           <KeyboardAwareScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <View style={styles.content}>
-              <View style={styles.imageContainer}>
+              <View style={styles.imageContainer} testID="image-container">
                 {imageUrl ? (
                   <View style={styles.imageWrapper}>
                     <Image source={{ uri: imageUrl }} style={styles.image} />
@@ -121,6 +121,7 @@ export default function ModalScreen() {
                   <Pressable
                     style={styles.noImage}
                     onPress={() => setShowCamera(true)}
+                    testID="open-camera"
                   >
                     <FontAwesome
                       name="camera"

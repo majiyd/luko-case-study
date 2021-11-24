@@ -1,6 +1,6 @@
 require("babel-polyfill");
 import { cleanup, init } from "detox";
-import * as adapter from "detox/runners/jest/adapter";
+const adapter = require('detox/runners/jest/adapter')
 
 const config = require("../package.json").detox;
 

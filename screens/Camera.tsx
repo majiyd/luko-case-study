@@ -11,7 +11,7 @@ import { Camera } from "expo-camera";
 type Props = {
   turnOff: () => void;
   takePicture: (uri: string) => void;
-}
+};
 
 const CameraScreen = ({ turnOff, takePicture }: Props) => {
   const [hasPermission, setHasPermission] = useState(false);
@@ -45,7 +45,7 @@ const CameraScreen = ({ turnOff, takePicture }: Props) => {
           <Pressable style={styles.button} onPress={turnOff} hitSlop={8}>
             <Text style={styles.text}> Cancel </Text>
           </Pressable>
-          <Pressable style={styles.snap} onPress={snap}>
+          <Pressable style={styles.snap} onPress={snap} testID="snap">
             <View style={styles.inner} />
           </Pressable>
           <View style={{ height: 60, width: 40, flex: 1 }} />
