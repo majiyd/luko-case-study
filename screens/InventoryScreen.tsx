@@ -1,29 +1,38 @@
-import React, {useEffect, useState} from 'react';
-import { FlatList, StyleSheet } from 'react-native';
-import api from '../api';
-import InventoryItem from '../components/InventoryItem';
-import { View } from '../components/Themed';
-import { Inventory } from '../types';
+import { useFocusEffect } from "@react-navigation/core";
+import React, { useEffect, useState, useCallback } from "react";
+import { FlatList, StyleSheet } from "react-native";
+import api from "../api";
+import InventoryItem from "../components/InventoryItem";
+import { View } from "../components/Themed";
+import { Inventory } from "../types";
 
 export default function InventoryScreen() {
-  useEffect(() => {
-    getData()
-  }, [])
+  useFocusEffect(
+    useCallback(() => {
+      const unsubscribe = getData;
 
-  const [inventories, setInventories] = useState<Inventory[]>([])
+      unsubscribe();
+    }, [])
+  );
 
-  const getData  =  async () => {
+  const [inventories, setInventories] = useState<Inventory[]>([]);
+
+  const getData = async () => {
     try {
-      const response =  await api.get()
-      setInventories(response.data)
-      
+      const response = await api.get();
+      setInventories(response.data);
     } catch (error) {
-      console.log(`error`, error)
+      console.log(`error`, error);
     }
-  }
+  };
   return (
     <View style={styles.container}>
-      <FlatList contentContainerStyle={styles.list} data={inventories} renderItem={({item}) => <InventoryItem details={item} />} keyExtractor={item => String(item.id)} />
+      <FlatList
+        contentContainerStyle={styles.list}
+        data={inventories}
+        renderItem={({ item }) => <InventoryItem details={item} />}
+        keyExtractor={(item) => String(item.id)}
+      />
     </View>
   );
 }
@@ -31,11 +40,11 @@ export default function InventoryScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 15
+    paddingVertical: 15,
   },
   list: {
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-  }
+    flexWrap: "wrap",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+  },
 });

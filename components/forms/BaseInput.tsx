@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, TextInput, StyleSheet, ViewStyle } from "react-native";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  ViewStyle,
+  KeyboardTypeOptions,
+} from "react-native";
 import Colors from "../../constants/Colors";
 import BaseText from "../BaseText";
 
@@ -10,6 +16,7 @@ type Props = {
   placeholder: string;
   label: string;
   style?: ViewStyle;
+  keyboardType?: KeyboardTypeOptions;
 };
 
 const BaseInput = ({
@@ -19,6 +26,7 @@ const BaseInput = ({
   placeholder,
   label,
   style,
+  keyboardType,
 }: Props) => {
   const [isFocused, setFocused] = useState(false);
   return (
@@ -32,6 +40,7 @@ const BaseInput = ({
           style={styles.input}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
+          keyboardType={keyboardType}
         />
         {type === "amount" && <BaseText style={styles.currency}>€</BaseText>}
       </View>

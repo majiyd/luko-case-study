@@ -8,10 +8,11 @@ import ActionText from "../components/ActionText";
 import Colors from "../constants/Colors";
 import BaseInput from "../components/forms/BaseInput";
 import BasePicker from "../components/forms/BasePicker";
-import { Category, IPicker } from "../types";
+import { Category, Inventory, IPicker } from "../types";
 import BaseTextArea from "../components/forms/BaseTextArea";
 import { useNavigation } from "@react-navigation/core";
 import CameraScreen from "./Camera";
+import api from "../api";
 
 interface ICategory extends IPicker {
   value: Category;
@@ -29,13 +30,34 @@ export default function ModalScreen() {
   const [showCamera, setShowCamera] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [name, setName] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState<ICategory | undefined>(undefined);
   const [value, setValue] = useState("");
   const [description, setDescription] = useState("");
 
   const takePicture = (url: string) => {
     setImageUrl(url);
     setShowCamera(false);
+  };
+
+  const handleValueChange = (text: string) => {
+    setValue(text.replace(/,/gi, ""));
+  };
+
+  const addInventory = async () => {
+    try {
+      const data: Inventory = {
+        id: new Date().getTime(),
+        name,
+        purchasePrice: Number(value),
+        type: category?.value!,
+        description,
+        photo: imageUrl,
+      };
+      await api.post(data);
+      navigation.goBack();
+    } catch (error) {
+      console.log(`error`, error);
+    }
   };
 
   return (
@@ -52,8 +74,10 @@ export default function ModalScreen() {
             <ActionText onPress={() => navigation.goBack()}>Cancel</ActionText>
             <ActionText
               style={styles.add}
-              isDisabled={true}
-              onPress={() => console.log("cancel")}
+              isDisabled={
+                !imageUrl || !name || !Number(value) || !category?.value
+              }
+              onPress={addInventory}
             >
               Add
             </ActionText>
@@ -95,20 +119,30 @@ export default function ModalScreen() {
                 label="Name"
                 placeholder="Bracelet"
                 style={styles.input}
+                onChangeText={(text) => setName(text)}
+                value={name}
               />
               <BasePicker
                 items={categories}
                 style={styles.input}
                 label="Category"
                 placeholder="Select a category..."
+                onChangeItem={(data) => setCategory(data as ICategory)}
               />
               <BaseInput
-                label="Name"
-                placeholder="Bracelet"
+                label="Value"
+                placeholder="700"
                 type="amount"
                 style={styles.input}
+                keyboardType="number-pad"
+                value={Number(value).toLocaleString()}
+                onChangeText={handleValueChange}
               />
-              <BaseTextArea label="Description" />
+              <BaseTextArea
+                label="Description"
+                onChangeText={(data) => setDescription(data)}
+                value={description}
+              />
             </View>
           </KeyboardAwareScrollView>
         </View>
@@ -120,7 +154,7 @@ export default function ModalScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.light.Gray50,
+    backgroundColor: Colors.light.gray50,
     paddingVertical: 15,
   },
   header: {
