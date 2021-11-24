@@ -83,6 +83,19 @@ function BottomTabNavigator() {
       initialRouteName="Inventory"
       screenOptions={{
         tabBarActiveTintColor: Colors.light.bluko500,
+        headerTitleStyle: {
+          textAlign: "left",
+          fontSize: 34,
+          lineHeight: 42,
+          fontWeight: "700",
+        },
+        headerTintColor: Colors.light.gray1000,
+        headerStyle: {
+          elevation: 0,
+          borderWidth: 0,
+          shadowColor: "transparent",
+        },
+        headerTitleAlign: "left",
       }}
     >
       <BottomTab.Screen
