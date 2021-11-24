@@ -3,9 +3,12 @@
  * https://reactnavigation.org/docs/typescript/
  */
 
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import {
+  CompositeScreenProps,
+  NavigatorScreenParams,
+} from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 declare global {
   namespace ReactNavigation {
@@ -19,10 +22,8 @@ export type RootStackParamList = {
   NotFound: undefined;
 };
 
-export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
-  RootStackParamList,
-  Screen
->;
+export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
+  NativeStackScreenProps<RootStackParamList, Screen>;
 
 export type RootTabParamList = {
   Home: undefined;
@@ -32,17 +33,24 @@ export type RootTabParamList = {
   Menu: undefined;
 };
 
-export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
-  BottomTabScreenProps<RootTabParamList, Screen>,
-  NativeStackScreenProps<RootStackParamList>
->;
+export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
+  CompositeScreenProps<
+    BottomTabScreenProps<RootTabParamList, Screen>,
+    NativeStackScreenProps<RootStackParamList>
+  >;
+
+export type Category = "ART" | "ELECTRONICS" | "JEWELRY" | "MUSIC_INSTRUMENT";
 
 export interface Inventory {
   id: number | string;
   name: string;
   purchasePrice: number;
-  type: 'ART' | 'ELECTRONICS' | 'JEWELRY' | 'MUSIC_INSTRUMENT';
+  type: Category;
   description?: string;
   photo: string;
+}
 
+export interface IPicker {
+  title: string;
+  value: string;
 }
